@@ -33,7 +33,7 @@ A destination bucket is created in your GCP project during the TF deployment how
 If a bucket is specified outside the deployment project, `storage.object.create` permission needs to be granted to the Document AI Service Agent.
 
 ## Workflow Execution
-Specify your destination bucket in the data filed below.
+Specify your destination bucket in the data field below.
 
 ```
 gcloud workflows run document-ai-batchProcess-data `--data={"destinationBucket":""}` 

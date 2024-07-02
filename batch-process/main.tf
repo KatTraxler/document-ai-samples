@@ -23,7 +23,7 @@ resource "google_service_account" "service_account" {
 }
 resource "google_project_iam_binding" "project" {
   project = var.project_id
-  role    = "roles/documentai.admin"
+  role    = "roles/documentai.apiUser"
 
   members = [
     google_service_account.service_account.member

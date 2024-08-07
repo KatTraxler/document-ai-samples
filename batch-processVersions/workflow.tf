@@ -1,6 +1,6 @@
-resource "google_workflows_workflow" "workflow_to_batchProcess_data_on_documentai" {
-  name            = "document-ai-batchProcess-data"
-  description     = "A workflow that uses the batch process method on a Document AI processor to extract text from a pdf stored in a GCS bucket and return the result to a second bucket"
+resource "google_workflows_workflow" "workflow_to_batchProcessVersions_data_on_documentai" {
+  name            = "document-ai-batchProcessVersions-data"
+  description     = "A workflow that uses the batch processing method on a Processor Version from the Document AI service to extract text from a pdf stored in a GCS bucket and output the result to a second"
   service_account = google_service_account.service_account.id
   project         = var.project_id
   region          = var.region  
@@ -36,10 +36,11 @@ main:
           - input_gcs_bucket: ${google_storage_bucket.source_bucket.url}
           - output_gcs_bucket: $${input.destinationBucket}
           - processor_id: ${google_document_ai_processor.processor.id}
-    - batch_process:
-        call: googleapis.documentai.v1.projects.locations.processors.batchProcess
+          - processor_id_version: $${processor_id +"/processorVersions/stable"}
+    - batch_processVersions:
+        call: googleapis.documentai.v1.projects.locations.processors.processorVersions.batchProcess
         args:
-          name: $${processor_id}
+          name: $${processor_id_version}
           location: "us"
           body:
             inputDocuments:

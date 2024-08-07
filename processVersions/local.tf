@@ -7,13 +7,14 @@ locals {
     "cloudbilling.googleapis.com",
     "storage.googleapis.com",
     "serviceusage.googleapis.com",
-    "storage-component.googleapis.com",
     "documentai.googleapis.com",
     "storage-api.googleapis.com",
+    "storage-component.googleapis.com",
     "workflows.googleapis.com",
     "workflowexecutions.googleapis.com"
   ]
 }
+
 
 locals {
   enable_logs = [

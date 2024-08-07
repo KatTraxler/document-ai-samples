@@ -12,6 +12,7 @@ resource "google_project_service" "enable_project_apis" {
   }
 }
 
+
 ########################################################################
 # Enable Logging
 ########################################################################
@@ -62,7 +63,7 @@ resource "google_project_iam_binding" "service_usage" {
 
 
 ########################################################################
-# Create Source Object, Bucket and Destination Bucket
+# Create Source Object and Bucket
 ########################################################################
 resource "random_string" "bucket_suffix" {
   length = 4
@@ -87,15 +88,15 @@ resource "google_storage_bucket_object" "samnple_object" {
   bucket = google_storage_bucket.source_bucket.name
 }
 
-resource "google_storage_bucket" "destination_bucket" {
-  name          = "document-ai-destination-${random_string.bucket_suffix.id}"
-  location      = "US"
-  project       = var.project_id
-  force_destroy = true
+# resource "google_storage_bucket" "destination_bucket" {
+#   name          = "document-ai-destination-${random_string.bucket_suffix.id}"
+#   location      = "US"
+#   project       = var.project_id
+#   force_destroy = true
 
-  uniform_bucket_level_access = true
+#   uniform_bucket_level_access = true
 
-}
+# }
 
 ########################################################################
 # Create Document AI Processor - Use Prebuilt W9 Processor
